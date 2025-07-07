@@ -86,7 +86,73 @@ class TelegramChatReaderMCP {
                             required: ['apiId', 'apiHash', 'phoneNumber'],
                         },
                     },
-                    // ... other tools
+                    {
+                        name: 'get_dialogs',
+                        description: 'Get list of all your chats (dialogs)',
+                        inputSchema: {
+                            type: 'object',
+                            properties: {
+                                limit: {
+                                    type: 'number',
+                                    description: 'Maximum number of chats to retrieve (default: 100)',
+                                    minimum: 1,
+                                    maximum: 1000,
+                                },
+                            },
+                        },
+                    },
+                    {
+                        name: 'get_messages',
+                        description: 'Get messages from a specific chat',
+                        inputSchema: {
+                            type: 'object',
+                            properties: {
+                                entityId: {
+                                    type: 'string',
+                                    description: 'Chat ID, username, or phone number',
+                                },
+                                limit: {
+                                    type: 'number',
+                                    description: 'Number of messages to retrieve (default: 50)',
+                                    minimum: 1,
+                                    maximum: 1000,
+                                },
+                                offsetId: {
+                                    type: 'number',
+                                    description: 'Message ID to start from (for pagination)',
+                                },
+                            },
+                            required: ['entityId'],
+                        },
+                    },
+                    {
+                        name: 'search_global',
+                        description: 'Search for messages globally across all chats',
+                        inputSchema: {
+                            type: 'object',
+                            properties: {
+                                query: {
+                                    type: 'string',
+                                    description: 'Search query',
+                                },
+                                limit: {
+                                    type: 'number',
+                                    description: 'Maximum number of results (default: 50)',
+                                    minimum: 1,
+                                    maximum: 100,
+                                },
+                            },
+                            required: ['query'],
+                        },
+                    },
+                    {
+                        name: 'get_me',
+                        description: 'Get information about the current user',
+                        inputSchema: {
+                            type: 'object',
+                            properties: {},
+                        },
+                    },
                 ],
             };
         });
