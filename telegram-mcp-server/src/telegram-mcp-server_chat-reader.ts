@@ -14,6 +14,7 @@ import PeerUser = Api.PeerUser;
 class TelegramChatReaderMCP {
     private server: Server;
     private client: TelegramClient | null = null;
+    private credentialsFile = './telegram_credentials.json';
     private sessionFile = './telegram_session.txt';
     private session: StringSession;
 
@@ -35,6 +36,18 @@ class TelegramChatReaderMCP {
 
         this.setupToolHandlers();
         this.setupErrorHandling();
+    }
+
+    private loadCredentials(): any {
+        try {
+            if (fs.existsSync(this.credentialsFile)) {
+                const data = fs.readFileSync(this.credentialsFile, 'utf8');
+                return JSON.parse(data);
+            }
+        } catch (error) {
+            console.error('Could not load credentials file:', error);
+        }
+        return null;
     }
 
     private loadSession(): string {
@@ -83,6 +96,8 @@ class TelegramChatReaderMCP {
 
             try {
                 switch (name) {
+                    case 'auto_connect':
+                        return await this.autoConnect();
                     case 'connect_telegram':
                         return await this.connectTelegram(args);
                     case 'get_dialogs':
@@ -276,8 +291,40 @@ class TelegramChatReaderMCP {
         };
     }
 
+    private async autoConnect() {
+        const credentials = this.loadCredentials();
+        if (!credentials) {
+            throw new Error('No saved credentials found. Please run authentication script first.');
+        }
+
+        const sessionString = this.loadSession();
+        if (!sessionString) {
+            throw new Error('No saved session found. Please run authentication script first.');
+        }
+
+        this.session = new StringSession(sessionString);
+        this.client = new TelegramClient(this.session, parseInt(credentials.apiId), credentials.apiHash, {
+            connectionRetries: 5,
+        });
+
+        try {
+            await this.client.connect();
+
+            return {
+                content: [
+                    {
+                        type: 'text',
+                        text: 'Successfully connected to Telegram using saved session!',
+                    },
+                ],
+            };
+        } catch (error: any) {
+            throw new Error(`Auto-connection failed: ${error.message}`);
+        }
+    }
+
     private async connectTelegram(args: any) {
-        const {apiId, apiHash, phoneNumber} = args;
+        const {apiId, apiHash} = args;
 
         const sessionString = this.loadSession();
         this.session = new StringSession(sessionString);
