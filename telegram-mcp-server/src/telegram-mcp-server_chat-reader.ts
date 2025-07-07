@@ -14,8 +14,8 @@ import PeerUser = Api.PeerUser;
 class TelegramChatReaderMCP {
     private server: Server;
     private client: TelegramClient | null = null;
-    private credentialsFile = './telegram_credentials.json';
-    private sessionFile = './telegram_session.txt';
+    private credentialsFile = '/Users/lukechimbp2023/Documents_local/idea/mcp_server/telegram-mcp-server/telegram_credentials.json';
+    private sessionFile = '/Users/lukechimbp2023/Documents_local/idea/mcp_server/telegram-mcp-server/telegram_session.txt';
     private session: StringSession;
 
     constructor() {
