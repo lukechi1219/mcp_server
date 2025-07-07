@@ -1,10 +1,11 @@
 {
-  "name": "telegram-mcp-server_bot-api",
+  "name": "telegram-mcp-server_chat-reader",
   "version": "1.0.0",
-  "main": "dist/telegram-mcp-server_bot-api.js",
+  "main": "dist/telegram-mcp-server_chat-reader.js",
   "scripts": {
     "build": "tsc",
-    "start_chat-reader": "node dist/telegram-mcp-server_chat-reader.js",
+    "start": "node dist/telegram-mcp-server_chat-reader.js",
+    "authenticate": "ts-node scripts/authenticate.ts",
     "dev_chat-reader": "ts-node src/telegram-mcp-server_chat-reader.ts",
     "watch_chat-reader": "nodemon --exec ts-node src/telegram-mcp-server_chat-reader.ts",
     "start_bot-api": "node dist/telegram-mcp-server_bot-api.js",
@@ -12,8 +13,7 @@
     "watch_bot-api": "nodemon --exec ts-node src/telegram-mcp-server_bot-api.ts"
   },
   "bin": {
-    "telegram-mcp-server_chat-reader": "./dist/telegram-mcp-server_chat-reader.js",
-    "telegram-mcp-server_bot-api": "./dist/telegram-mcp-server_bot-api.js"
+    "telegram-mcp-server_chat-reader": "./dist/telegram-mcp-server_chat-reader.js"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +22,8 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.15.0",
     "node-localstorage": "^3.0.5",
-    "node-telegram-bot-api": "^0.66.0"
+    "node-telegram-bot-api": "^0.66.0",
+    "telegram": "^2.26.22"
   },
   "devDependencies": {
     "@types/node": "^24.0.10",
