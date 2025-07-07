@@ -1,9 +1,15 @@
 {
-  "name": "telegram-mcp-server",
+  "name": "telegram-mcp-server_bot_api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/telegram-mcp-server_bot_api.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "node dist/telegram-mcp-server_bot_api.js",
+    "dev": "ts-node src/_bot_api.ts",
+    "watch": "nodemon --exec ts-node src/telegram-mcp-server_bot_api.ts"
+  },
+  "bin": {
+    "telegram-mcp-server_bot_api": "./dist/telegram-mcp-server_bot_api.js"
   },
   "keywords": [],
   "author": "",
