@@ -9,7 +9,7 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 import TelegramBot from 'node-telegram-bot-api';
 
-class TelegramMcpServer_bot_api {
+class TelegramMcpServer_botApi {
     private token = '';
     private bot: TelegramBot = new TelegramBot(this.token);
     private server: Server;
@@ -17,7 +17,7 @@ class TelegramMcpServer_bot_api {
     constructor() {
         this.server = new Server(
             {
-                name: 'telegram-mcp-server_bot_api',
+                name: 'telegram-mcp-server_bot-api',
                 version: '1.0.0',
             },
             {
@@ -212,5 +212,5 @@ class TelegramMcpServer_bot_api {
 }
 
 // Start the server
-const server = new TelegramMcpServer_bot_api();
+const server = new TelegramMcpServer_botApi();
 server.run().catch(console.error);
