@@ -4,10 +4,12 @@
   "main": "dist/telegram-mcp-server_chat-reader.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/telegram-mcp-server_chat-reader.js",
     "authenticate": "ts-node scripts/authenticate.ts",
+
+    "start_chat-reader": "node dist/telegram-mcp-server_chat-reader.js",
     "dev_chat-reader": "ts-node src/telegram-mcp-server_chat-reader.ts",
     "watch_chat-reader": "nodemon --exec ts-node src/telegram-mcp-server_chat-reader.ts",
+
     "start_bot-api": "node dist/telegram-mcp-server_bot-api.js",
     "dev_bot-api": "ts-node src/telegram-mcp-server_bot-api.ts",
     "watch_bot-api": "nodemon --exec ts-node src/telegram-mcp-server_bot-api.ts"
